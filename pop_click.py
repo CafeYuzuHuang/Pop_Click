@@ -10,6 +10,7 @@ from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 
 
+# Spyder IDE test
 if __name__ == "__main__": WD_Path = getcwd() # executed
 else: WD_Path = path.dirname(__file__) # imported
 WD_Path += "\\chromedriver.exe" # 使用的Webdriver所在路徑
@@ -62,16 +63,20 @@ def BruteClicking(counts, dst_url):
         sleep(2)
         lowlim = ord('a')
         uplim = ord('z')
-        for _ in range(counts):
+        i = 0
+        while i < counts:
             k = chr(randint(lowlim, uplim))
             ActionChains(driver).send_keys(k).perform()
             # print("Send key: ", k)
+            i += 1
             sleep(random()*0.1) # wait 0.0 to 0.1 s
     except Exception as e:
         print(e)
     finally:
-        print("BruteClicking finishes successfully.")
-        print("Clicks = ", counts)
+        print("Target # of clicks: ", counts)
+        print("Performed # of clicks: ", i)
+        # 關閉網頁前，別忘了先截圖！
+        input("Please press any key to close webdriver ...")
         driver.close()
     return None
 
